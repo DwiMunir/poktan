@@ -6,8 +6,15 @@ use CodeIgniter\Router\RouteCollection;
  * @var RouteCollection $routes
  */
 
+// $routes->get('/path', 'namaController::namaFunction');
+
+
 // Landing page route
 $routes->get('/', 'Home::index');
+
+// Contact form routes
+$routes->get('contact', 'Home::contact');
+$routes->post('messages/send', 'Messages::send');
 
 // Authentication routes
 $routes->group('auth', function($routes) {
@@ -28,5 +35,11 @@ $routes->group('dashboard', ['filter' => 'auth'], function($routes) {
     $routes->get('gallery', 'Dashboard::gallery');
     $routes->post('gallery', 'Dashboard::uploadMedia');
     $routes->delete('gallery/(:num)', 'Dashboard::deleteMedia/$1');
-    $routes->get('members', 'Dashboard::members');
+    
+    // Anggota routes
+    $routes->get('members', 'Dashboard::anggota');
+    $routes->post('members', 'Dashboard::createAnggota');
+    $routes->delete('members/(:num)', 'Dashboard::deleteAnggota/$1');
+    
+    // $routes->get('members', 'Dashboard::members');
 });
